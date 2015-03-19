@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Voice Explorer</title>
+  <meta charset="utf-8">
+  <meta name="description" content="Voice Explorer">
+  <meta name="author" content="Ying Li">
+  <meta name="generator" content="slidify" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/default.css" media="all" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/phone.css" 
+    media="only screen and (max-device-width: 480px)" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/slidify.css" >
+  <link rel="stylesheet" href="libraries/highlighters/highlight.js/css/tomorrow.css" />
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  
+  
+  <!-- Grab CDN jQuery, fall back to local if offline -->
+  <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
+  <script>window.jQuery || document.write('<script src="libraries/widgets/quiz/js/jquery.js"><\/script>')</script> 
+  <script data-main="libraries/frameworks/io2012/js/slides" 
+    src="libraries/frameworks/io2012/js/require-1.0.8.min.js">
+  </script>
+  
+  
+
+</head>
+<body style="opacity: 0">
+  <slides class="layout-widescreen">
+    
+    <!-- LOGO SLIDE -->
+        <slide class="title-slide segue nobackground">
+  <hgroup class="auto-fadein">
+    <h1>Voice Explorer</h1>
+    <h2></h2>
+    <p>Ying Li<br/>EV Analysis</p>
+  </hgroup>
+  <article></article>  
+</slide>
+    
+
+    <!-- SLIDES -->
+    <slide class="" id="slide-1" style="background:;">
+  <hgroup>
+    <h2>we are passionate about exploring voice data</h2>
+  </hgroup>
+  <article data-timings="">
+    <ol>
+<li>voice data is very rich in both descriptive power as well as predictive power</li>
+<li>many existing research works are done in adjacent research fields that are ripe to be brought together for more fruitful research</li>
+<li>many R packages and functions can readily be applied to voice data for amazing discovery analysis</li>
+<li>there are vast amount of voice data available to be explored for finding noval solutions to problems new and old</li>
+<li>example applications
+
+<ul>
+<li>human machine communication</li>
+<li>affective computing</li>
+</ul></li>
+</ol>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>explore in time domain</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>We can take a look at the sound wave of the voice recording in the time domain. 
+Listen to the two voice recordings:</p>
+
+<ul>
+<li>voice 1: <a href="http://evanalysiscorp.com/analysis/shiny/voiceExplorer/JFK_weChoose.wav">http://evanalysiscorp.com/analysis/shiny/voiceExplorer/JFK_weChoose.wav</a></li>
+<li>voice 2: <a href="http://evanalysiscorp.com/analysis/shiny/voiceExplorer/Obama_theyShare.wav">http://evanalysiscorp.com/analysis/shiny/voiceExplorer/Obama_theyShare.wav</a></li>
+</ul>
+
+<p><img src="assets/fig/unnamed-chunk-2-1.png" alt="plot of chunk unnamed-chunk-2"> </p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>explore in frequency domain</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>exploration and analysis in frequency domain often utilize Fast Fourier Transform (FFT)</li>
+<li>there are many functions available for running FFT on a voice wave signal</li>
+<li>we use R function periodogram in library &quot;tuneR&quot;, for which we can select the FFT window size and window overlap size (below plots uses window size 1024 and overlap size 256 on recording voice 1)</li>
+</ul>
+
+<p><img src="assets/fig/unnamed-chunk-3-1.png" alt="plot of chunk unnamed-chunk-3"> </p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>to start exploring</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>an interactive application is developed to help the exploration of voice data</li>
+<li>using the application, one can alter the FFT window size and window overlap size and watch the effect in real time</li>
+<li>go to <a href="http://yingli.shinyapps.io/voiceExplorer/">http://yingli.shinyapps.io/voiceExplorer/</a> </li>
+</ul>
+
+<p><img src="assets/fig/unnamed-chunk-4-1.png" alt="plot of chunk unnamed-chunk-4"> </p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+    <slide class="backdrop"></slide>
+  </slides>
+  <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
+    <ul>
+      <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=1 title='we are passionate about exploring voice data'>
+         1
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=2 title='explore in time domain'>
+         2
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=3 title='explore in frequency domain'>
+         3
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=4 title='to start exploring'>
+         4
+      </a>
+    </li>
+  </ul>
+  </div>  <!--[if IE]>
+    <script 
+      src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">  
+    </script>
+    <script>CFInstall.check({mode: 'overlay'});</script>
+  <![endif]-->
+</body>
+  <!-- Load Javascripts for Widgets -->
+  
+  <!-- LOAD HIGHLIGHTER JS FILES -->
+  <script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- DONE LOADING HIGHLIGHTER JS FILES -->
+   
+  </html>

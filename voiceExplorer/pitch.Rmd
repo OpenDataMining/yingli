@@ -1,0 +1,86 @@
+---
+title       : Voice Explorer
+subtitle    : 
+author      : Ying Li
+job         : EV Analysis
+framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
+highlighter : highlight.js  # {highlight.js, prettify, highlight}
+hitheme     : tomorrow      # 
+widgets     : []            # {mathjax, quiz, bootstrap}
+mode        : selfcontained # {standalone, draft}
+knit        : slidify::knit2slides
+---
+
+## we are passionate about exploring voice data
+
+1. voice data is very rich in both descriptive power as well as predictive power
+2. many existing research works are done in adjacent research fields that are ripe to be brought together for more fruitful research
+3. many R packages and functions can readily be applied to voice data for amazing discovery analysis
+4. there are vast amount of voice data available to be explored for finding noval solutions to problems new and old
+5. example applications
+ - human machine communication
+ - affective computing
+
+--- .class #id 
+
+## explore in time domain
+
+```{r, echo=FALSE, warning=FALSE,message=FALSE,results='hide',error=FALSE}
+library(tuneR)
+fileUrl1 <- "www.evanalysiscorp.com/analysis/shiny/voiceExplorer/data/JFK_weChoose.wav"
+localFile1 <- "./JFK_weChoose.wav"
+download.file(fileUrl1, destfile=localFile1, method="curl")
+fileUrl2 <- "www.evanalysiscorp.com/analysis/shiny/voiceExplorer/data/Obama_theyShare.wav"
+localFile2 <- "./Obama_theyShare.wav"
+download.file(fileUrl2, destfile=localFile2, method="curl")
+voice1 <- readWave(localFile1)
+voice2 <- readWave(localFile2)
+```
+
+We can take a look at the sound wave of the voice recording in the time domain. 
+Listen to the two voice recordings:
+- voice 1: http://evanalysiscorp.com/analysis/shiny/voiceExplorer/JFK_weChoose.wav
+- voice 2: http://evanalysiscorp.com/analysis/shiny/voiceExplorer/Obama_theyShare.wav
+
+
+```{r, echo =FALSE, fig.width=14,fig.height=5}
+par(mfrow=c(1,2))
+plot(voice1, main="amplitude plot of voice 1", ylim = c(0,30000))
+plot(voice2, main="amplitude plot of voice 2", ylim = c(0,30000))
+par(mfrow=c(1,1))
+
+```
+
+
+--- .class #id 
+
+## explore in frequency domain
+
+- exploration and analysis in frequency domain often utilize Fast Fourier Transform (FFT)
+- there are many functions available for running FFT on a voice wave signal
+- we use R function periodogram in library "tuneR", for which we can select the FFT window size and window overlap size (below plots uses window size 1024 and overlap size 256 on recording voice 1)
+
+```{r, echo=FALSE, warning=FALSE,message=FALSE,error=FALSE, fig.width=14, fig.height=5}
+windowSize <- 1024; overlapSize <- 256; par(mfrow=c(1,2))
+plot(FFpure(periodogram(voice1, width = windowSize, overlap=overlapSize)),
+           xlab="time window index", ylab=NA, main ="fundamental frequency (unit= Hz)", col="red", pch=4)
+plot(periodogram(voice1, width = windowSize, overlap=overlapSize), xlim=c(0,4000), xlab = "frequency", main = "power spectral density")
+par(mfrow=c(1,1))
+```
+
+
+--- .class #id 
+
+## to start exploring
+
+- an interactive application is developed to help the exploration of voice data
+- using the application, one can alter the FFT window size and window overlap size and watch the effect in real time
+- go to http://yingli.shinyapps.io/voiceExplorer/ 
+
+```{r, echo = F, fig.width=10, fig.height=5}
+library(png)
+library(grid)
+img <- readPNG("/Users/yingli/OpenDataMining/yingli/voiceExplorer/ScreenShot.png")
+ grid.raster(img)
+```
+
