@@ -1,0 +1,106 @@
+---
+title: "Data Club - Meet up #2"
+author: "Ying Li"
+date: "March 30, 2015"
+output: html_document
+keep_md: yes
+logo: null
+job: EV Analysis Corporation
+framework: io2012
+---
+
+all about getting data 
+----------
+
+### summary
+- reading data from twitter API
+
+
+#### loading the packages
+
+```{r}
+library(twitteR)
+library(ROAuth)
+library(plyr)
+library(stringr)
+library(ggplot2)
+require(XML)
+require(tm)
+require(wordcloud)
+require(RColorBrewer)
+require(Snowball)
+require(SnowballC)
+require(twitteR)
+require(ggplot2)
+require(stringr)
+require(slam)
+require(sentiment)
+require(JSON)
+library(lattice)
+library(RJSONIO)
+library(data.table)
+library(igraph)
+library(TraMineR)
+library(dtw)
+library(shiny)
+library(PerformanceAnalytics)
+library(lubridate)
+```
+
+#### getting tweets via twitter API
+
+```{r}
+requestURL <- "https://api.twitter.com/oauth/request_token"
+authURL = "https://api.twitter.com/oauth/authorize"
+accessURL = "https://api.twitter.com/oauth/access_token"
+consumerKey = "xxxxxxxxxxxxxxxx"
+consumerSecret = "yyyyyyyyyyyyyyyyyyyyyyy"
+Cred <- OAuthFactory$new(consumerKey=consumerKey,
+                         consumerSecret=consumerSecret,
+                         requestURL=requestURL,
+                         accessURL=accessURL,
+                         authURL=authURL)
+Cred$handshake()
+# got this from the web page 3395082 , and then enter as response to R
+save(Cred, file="twitterAuthentication.Rdata")
+registerTwitterOAuth(Cred)
+```
+
+when in a new session, load the cred file and register
+
+```{r}
+load("twitterAuthentication.Rdata")
+registerTwitterOAuth(Cred)
+```
+
+make into a function, this uses my own app registration keys, 
+
+```{r}
+
+yingliTwitterAuth <- function(credFileName,newReg = FALSE)
+{
+    if (newReg == TRUE) {
+        # the TwitterKey and TwitterSecret is specific to Ying Li
+        requestURL = "https://api.twitter.com/oauth/request_token"
+        authURL = "https://api.twitter.com/oauth/authorize"
+        accessURL = "https://api.twitter.com/oauth/access_token"
+        myTwitterKey = "xxxxxxxxxxxxxxxxxx"
+        myTwitterSecret = "yyyyyyyyyyyyyyyyyyyyyyyyy"
+        myTwitterCred <- OAuthFactory$new(consumerKey=myTwitterKey, consumerSecret=myTwitterSecret, requestURL=requestURL, authURL=authURL, accessURL=accessURL)
+        myTwitterCred$handshake()  # when this was called, a pin will be displayed on browser, last pin # was 3395082
+        save(myTwitterCred, file=credFileName) # myTwitterCred is the variable name that holds the cred
+    }
+    load(credFileName)
+    registerTwitterOAuth(myTwitterCred)
+}
+```
+
+once registered, we can get tweets now
+
+```{r}
+jbln<- searchTwitter('jobaline', n=1000)
+jbln.df = twListToDF(jbln)
+jbln.df$text
+
+head(jbln.df)
+```
